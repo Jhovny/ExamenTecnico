@@ -1,0 +1,105 @@
+﻿
+@{
+    ViewBag.Title = "Calular Nota";
+}
+
+<h2>Calcular Promedio</h2>
+
+
+<p> Nota minima 13  para aprobar</p>
+
+<div class="row">
+
+
+
+
+
+    <div class="form-group">
+
+
+        <label>
+            Nota Final
+        </label>
+        <input type="text" class="form-control" id="txtNotaFinal" /> peso 45%
+    </div>
+
+    <div class="form-group">
+
+        <label>
+            Nota Parcial
+        </label>
+
+        <input type="text" class="form-control" id="txtNotaParcial" /> peso 35%
+    </div>
+
+    <div class="form-group">
+
+        <label>
+            Notas de trabajo (separado por punto y coma)
+        </label>
+
+        <div id="divNotasPromedio">
+
+            <input type="text" class="form-control" id="txtNotaTrabajos" /> peso 20%
+
+        </div>
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label>
+            Resultado
+        </label>
+
+        <input type="text" class="form-control" id="txtResultado" readonly="readonly" />
+    </div>
+
+    <div class="form-group">
+        <button id="btnCalcular" onclick="Calcular()">  Calcular Nota </button>
+    </div>
+
+    </div>
+
+
+<script>
+
+    function Calcular() {
+
+        var txtNotaFinal = parseFloat(document.getElementById("txtNotaFinal").value);
+        var txtNotaParcial = parseFloat(document.getElementById("txtNotaParcial").value);
+        
+        var txtNotaTrabajos = document.getElementById("txtNotaTrabajos").value;
+
+        var arrayNotasTrabajos = txtNotaTrabajos.split(";");
+
+        var totalNotastrabajo = 0;
+
+        for (var i = 0; i < arrayNotasTrabajos.length; i++) {
+
+            totalNotastrabajo = totalNotastrabajo + parseInt(arrayNotasTrabajos[i]);
+        }
+
+        totalNotastrabajo = (totalNotastrabajo) / (arrayNotasTrabajos.length );
+
+
+        var resultadoFinal = (txtNotaFinal * 0.45) + (txtNotaParcial * 0.35) + (totalNotastrabajo* 0.20);
+
+
+        
+
+        if (resultadoFinal <= 12.49) {
+            document.getElementById("txtResultado").value = "Nota: "+resultadoFinal+  " - Desaprobado";
+
+        } else {
+            
+            document.getElementById("txtResultado").value = "Nota: "+resultadoFinal+ " - Aprobado";
+        }
+
+
+    }
+
+
+
+</script>
